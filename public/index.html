@@ -45,17 +45,19 @@
 
     function preload ()
     {
-        this.load.image('sky', 'assets/sky.png');
+        this.load.image('sky', 'assets/galaxy.jpg');
         this.load.image('ground', 'assets/platform.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.audio('explosion','assets/explosion.m4a')
     }
 
     function create ()
     {
         //  A simple background for our game
         this.add.image(400, 300, 'sky');
+
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = this.physics.add.staticGroup();
@@ -193,12 +195,14 @@
     function hitBomb (player, bomb)
     {
         this.physics.pause();
+        let sound = this.sound.add('explosion')
+        sound.play()
 
         player.setTint(0xff0000);
 
         player.anims.play('turn');
 
-        gameOver = true;
+        //gameOver = true;
     }
 
 </script>
